@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "409137995622",
+    "project_id": "taskmanager-6f187",
+    "storage_bucket": "taskmanager-6f187.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:409137995622:android:5e868550c14f657132f2a7",
+        "android_client_info": {
+          "package_name": "com.example.testmusicapp1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIvJZvtHs3LfPanW_cfgKMofq3aiPKeSw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

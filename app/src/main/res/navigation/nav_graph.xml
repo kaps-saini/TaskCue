@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/authentication">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.testmusicapp1.presentation.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_taskCreator"
+            app:destination="@id/taskCreator" />
+    </fragment>
+    <fragment
+        android:id="@+id/profile"
+        android:name="com.example.testmusicapp1.presentation.Profile"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profile_to_authentication"
+            app:destination="@id/authentication"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_profile_to_profileSetup"
+            app:destination="@id/profileSetup"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskCreator"
+        android:name="com.example.testmusicapp1.presentation.TaskCreator"
+        android:label="fragment_task_creator"
+        tools:layout="@layout/fragment_task_creator" >
+        <argument
+            android:name="taskModel"
+            app:argType="com.example.testmusicapp1.models.TaskModel" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskDetailSheet"
+        android:name="com.example.testmusicapp1.presentation.TaskDetailSheet"
+        android:label="TaskDetailSheet"
+        tools:layout="@layout/task_reader_sheet">
+        <action
+            android:id="@+id/action_taskDetailSheet_to_taskCreator"
+            app:destination="@id/taskCreator" />
+    </fragment>
+    <fragment
+        android:id="@+id/chats"
+        android:name="com.example.testmusicapp1.presentation.chats"
+        android:label="fragment_chats"
+        tools:layout="@layout/fragment_chats" />
+    <fragment
+        android:id="@+id/authentication"
+        android:name="com.example.testmusicapp1.presentation.Authentication"
+        android:label="fragment_authentication"
+        tools:layout="@layout/fragment_authentication" >
+        <action
+            android:id="@+id/action_authentication_to_otpConfirmation"
+            app:destination="@id/otpConfirmation"
+            app:popUpTo="@id/authentication"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_authentication_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/authentication"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/otpConfirmation"
+        android:name="com.example.testmusicapp1.presentation.OtpConfirmation"
+        android:label="fragment_otp_confirmation"
+        tools:layout="@layout/fragment_otp_confirmation" >
+        <action
+            android:id="@+id/action_otpConfirmation_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/otpConfirmation"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="phoneNumber"
+            app:argType="string" />
+        <argument
+            android:name="verificationId"
+            app:argType="string" />
+        <argument
+            android:name="token"
+            app:argType="com.example.testmusicapp1.models.ResendTokenData" />
+        <action
+            android:id="@+id/action_otpConfirmation_to_profileSetup"
+            app:destination="@id/profileSetup"
+            app:popUpTo="@id/otpConfirmation"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/messaging"
+        android:name="com.example.testmusicapp1.presentation.Messaging"
+        android:label="fragment_messaging"
+        tools:layout="@layout/fragment_messaging" />
+    <fragment
+        android:id="@+id/profileSetup"
+        android:name="com.example.testmusicapp1.presentation.ProfileSetup"
+        android:label="fragment_profile_setup"
+        tools:layout="@layout/fragment_profile_setup" >
+        <action
+            android:id="@+id/action_profileSetup_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/profileSetup"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="MobileNo"
+            app:argType="string" />
+        <argument
+            android:name="UserData"
+            app:argType="com.example.testmusicapp1.models.UserDataModel"
+            app:nullable="true" />
+    </fragment>
+</navigation>
