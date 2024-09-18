@@ -9,7 +9,7 @@
         android:orientation="vertical"
         android:gravity="center"
         android:padding="16dp"
-        tools:context=".presentation.OtpConfirmation">
+        tools:context=".presentation.fragment.OtpConfirmation">
 
         <TextView
             android:layout_width="wrap_content"

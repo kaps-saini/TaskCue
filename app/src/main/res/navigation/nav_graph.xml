@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.testmusicapp1.presentation.HomeFragment"
+        android:name="com.task.taskCue.presentation.fragment.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/profile"
-        android:name="com.example.testmusicapp1.presentation.Profile"
+        android:name="com.task.taskCue.presentation.fragment.Profile"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action
@@ -32,16 +32,16 @@
     </fragment>
     <fragment
         android:id="@+id/taskCreator"
-        android:name="com.example.testmusicapp1.presentation.TaskCreator"
+        android:name="com.task.taskCue.presentation.fragment.TaskCreator"
         android:label="fragment_task_creator"
         tools:layout="@layout/fragment_task_creator" >
         <argument
             android:name="taskModel"
-            app:argType="com.example.testmusicapp1.models.TaskModel" />
+            app:argType="com.task.taskCue.domain.models.TaskModel" />
     </fragment>
     <fragment
         android:id="@+id/taskDetailSheet"
-        android:name="com.example.testmusicapp1.presentation.TaskDetailSheet"
+        android:name="com.task.taskCue.presentation.bottomsheet.TaskDetailSheet"
         android:label="TaskDetailSheet"
         tools:layout="@layout/task_reader_sheet">
         <action
@@ -50,12 +50,12 @@
     </fragment>
     <fragment
         android:id="@+id/chats"
-        android:name="com.example.testmusicapp1.presentation.chats"
+        android:name="com.task.taskCue.presentation.chats"
         android:label="fragment_chats"
         tools:layout="@layout/fragment_chats" />
     <fragment
         android:id="@+id/authentication"
-        android:name="com.example.testmusicapp1.presentation.Authentication"
+        android:name="com.task.taskCue.presentation.fragment.Authentication"
         android:label="fragment_authentication"
         tools:layout="@layout/fragment_authentication" >
         <action
@@ -71,7 +71,7 @@
     </fragment>
     <fragment
         android:id="@+id/otpConfirmation"
-        android:name="com.example.testmusicapp1.presentation.OtpConfirmation"
+        android:name="com.task.taskCue.presentation.fragment.OtpConfirmation"
         android:label="fragment_otp_confirmation"
         tools:layout="@layout/fragment_otp_confirmation" >
         <action
@@ -87,7 +87,7 @@
             app:argType="string" />
         <argument
             android:name="token"
-            app:argType="com.example.testmusicapp1.models.ResendTokenData" />
+            app:argType="com.task.taskCue.domain.models.ResendTokenData" />
         <action
             android:id="@+id/action_otpConfirmation_to_profileSetup"
             app:destination="@id/profileSetup"
@@ -96,12 +96,12 @@
     </fragment>
     <fragment
         android:id="@+id/messaging"
-        android:name="com.example.testmusicapp1.presentation.Messaging"
+        android:name="com.task.taskCue.presentation.Messaging"
         android:label="fragment_messaging"
         tools:layout="@layout/fragment_messaging" />
     <fragment
         android:id="@+id/profileSetup"
-        android:name="com.example.testmusicapp1.presentation.ProfileSetup"
+        android:name="com.task.taskCue.presentation.fragment.ProfileSetup"
         android:label="fragment_profile_setup"
         tools:layout="@layout/fragment_profile_setup" >
         <action
@@ -114,7 +114,7 @@
             app:argType="string" />
         <argument
             android:name="UserData"
-            app:argType="com.example.testmusicapp1.models.UserDataModel"
+            app:argType="com.task.taskCue.domain.models.UserDataModel"
             app:nullable="true" />
     </fragment>
 </navigation>
