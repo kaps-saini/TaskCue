@@ -27,12 +27,14 @@ import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import com.hbb20.CountryCodePicker
+import com.task.taskCue.data.local.SharedPrefManager
 import com.task.taskCue.helper.Helper
 import com.task.taskCue.presentation.vm.TaskViewModel
 import com.task.taskCue.utils.AuthResult
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class Authentication : Fragment() {
@@ -46,6 +48,8 @@ class Authentication : Fragment() {
 
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var googleSignInOptions: GoogleSignInOptions
+    @Inject
+    lateinit var sharedPrefManager: SharedPrefManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -79,8 +83,11 @@ class Authentication : Fragment() {
                 viewModel.authStatus.collect { result ->
                     when (result) {
                         is AuthResult.Error -> Helper.makeSnackBar(requireView(),result.message)
-                        AuthResult.Loading -> Helper.makeSnackBar(requireView(),"Loading...")
-                        is AuthResult.Success -> findNavController().navigate(R.id.action_authentication_to_homeFragment)
+                        AuthResult.Loading ->{}
+                        is AuthResult.Success -> {
+                            sharedPrefManager.setLoginStatus(true)
+                            findNavController().navigate(R.id.action_authentication_to_homeFragment)
+                        }
                     }
                 }
             }
@@ -93,6 +100,7 @@ class Authentication : Fragment() {
     }
 
     private fun userEvents(){
+        //Login through mobile no
         binding.btnSignIn.setOnClickListener {
             val num = validateMobileNumber()
             if (num.isNotEmpty()){
@@ -100,6 +108,7 @@ class Authentication : Fragment() {
             }
         }
 
+        //Login through email
         binding.btnGoogleSignIn.setOnClickListener {
             signIn(googleSignInClient)
         }
@@ -145,15 +154,9 @@ class Authentication : Fragment() {
         }
 
         override fun onVerificationFailed(e: FirebaseException) {
-            // This callback is invoked in an invalid request for verification is made,
-            // for instance if the the phone number format is not valid.
-
             if (e is FirebaseAuthInvalidCredentialsException) {
-                // Invalid request
                 Log.i("TAG", e.message.toString())
             }
-
-            // Show a message and update the UI
         }
 
         override fun onCodeSent(
@@ -176,10 +179,9 @@ class Authentication : Fragment() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-
                     val user = task.result?.user
                     findNavController().navigate(R.id.action_authentication_to_homeFragment)
+                    sharedPrefManager.setLoginStatus(true)
                 } else {
                     // Sign in failed, display a message and update the UI
 
@@ -192,7 +194,7 @@ class Authentication : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        if (auth.currentUser != null){
+        if (sharedPrefManager.isLoggedIn()) {
             findNavController().navigate(R.id.action_authentication_to_homeFragment)
         }
     }

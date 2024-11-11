@@ -89,7 +89,11 @@ class TaskCreator : Fragment() {
               addTask()
               if (time != null) {
                   checkAlarmPermission()
-                  scheduleNotification(time!!)
+                  try {
+                      scheduleNotification(time!!)
+                  }catch (e:Exception){
+                      Helper.makeSnackBar(requireView(),e.message.toString())
+                  }
               }
           }
 

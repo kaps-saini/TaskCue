@@ -8,7 +8,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cvTask"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -41,7 +41,7 @@
             <TextView
                 android:id="@+id/tvTaskName"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:ellipsize="end"
                 android:freezesText="false"
@@ -49,12 +49,32 @@
                 android:lines="1"
                 android:text="Task name"
                 android:textColor="@color/black"
-                android:textSize="24sp"
+                android:textSize="22sp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/ivOption"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5" />
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/tvTaskDescription"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="8dp"
+                android:ellipsize="end"
+                android:freezesText="false"
+                android:gravity="center_vertical"
+                android:lines="1"
+                android:text="Task desc"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/ivOption"
+                app:layout_constraintStart_toStartOf="@+id/tvTaskName"
+                app:layout_constraintTop_toBottomOf="@+id/tvTaskName" />
 
             <ImageView
                 android:id="@+id/ivOption"
@@ -62,7 +82,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginEnd="12dp"
                 android:gravity="center_vertical"
-                android:padding="6dp"
+                android:padding="12dp"
                 android:src="@drawable/ic_action_option"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

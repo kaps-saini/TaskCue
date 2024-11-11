@@ -21,7 +21,7 @@ data class Token(
 data class UserDataModel(
     val userId: String = "",
     val userName:String = "",
-    val mobileNo: String = "",
+    val mobileNo: String? = "",
     val userImage: String? = "",
-    val gender:String = ""
+    val gender:String? = ""
 ): Serializable

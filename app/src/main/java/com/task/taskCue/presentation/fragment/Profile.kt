@@ -23,7 +23,9 @@ import com.task.taskCue.utils.TaskResult
 import com.task.taskCue.utils.Utils.APP_VERSION
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.task.taskCue.data.local.SharedPrefManager
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class Profile : Fragment() {
@@ -35,6 +37,8 @@ class Profile : Fragment() {
     private val db = FirebaseFirestore.getInstance()
     private val viewModel by viewModels<TaskViewModel>()
     private lateinit var userDataModel: UserDataModel
+    @Inject
+    lateinit var sharedPrefManager: SharedPrefManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,7 +50,7 @@ class Profile : Fragment() {
         viewModel.getProfileData()
         viewModel.profileData.observe(viewLifecycleOwner){ response->
             when(response){
-                is TaskResult.Error -> Helper.makeSnackBar(requireView(), response.toString())
+                is TaskResult.Error -> Helper.makeSnackBar(requireView(), response.message.toString())
                 is TaskResult.Loading -> Helper.makeSnackBar(requireView(),"Loading")
                 is TaskResult.Success -> fetchProfileData(response)
             }
@@ -56,6 +60,7 @@ class Profile : Fragment() {
             showLogOutDialog(requireContext()){
                 auth.signOut()
                 if (auth.currentUser == null){
+                    sharedPrefManager.setLoginStatus(false)
                     findNavController().navigate(R.id.action_profile_to_authentication)
                 }
             }
@@ -70,6 +75,7 @@ class Profile : Fragment() {
                             if (deletionSuccessful) {
                                 Helper.makeSnackBar(requireView(),"Account deleted successfully")
                                 findNavController().navigate(R.id.action_profile_to_authentication)
+                                sharedPrefManager.clearLoginStatus()
                             }
                         }
                     }?.addOnFailureListener { exception ->
@@ -85,8 +91,13 @@ class Profile : Fragment() {
 
 
         binding.btnUpdateProfile.setOnClickListener {
-            val action = ProfileDirections.actionProfileToProfileSetup(userDataModel.mobileNo,userDataModel)
-            findNavController().navigate(action)
+            val action = userDataModel.mobileNo?.let { it1 ->
+                ProfileDirections.actionProfileToProfileSetup(
+                    it1,userDataModel)
+            }
+            if (action != null) {
+                findNavController().navigate(action)
+            }
         }
 
         binding.tvAppVersion.text = APP_VERSION

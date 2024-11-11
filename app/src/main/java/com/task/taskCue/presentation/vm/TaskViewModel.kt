@@ -41,9 +41,6 @@ class TaskViewModel @Inject constructor(
     private val _profileData:MutableLiveData<TaskResult<UserDataModel>> = MutableLiveData()
     val profileData:LiveData<TaskResult<UserDataModel>> get() = _profileData
 
-    private val _profileStatus:MutableLiveData<TaskResult<String>> = MutableLiveData()
-    val profileStatus:LiveData<TaskResult<String>> get() = _profileStatus
-
     private val _authStatus:MutableStateFlow<AuthResult> = MutableStateFlow(AuthResult.Loading)
     val authStatus:Flow<AuthResult> get() = _authStatus
 
@@ -80,21 +77,5 @@ class TaskViewModel @Inject constructor(
     fun getTasks() = viewModelScope.launch{
         _tasks = repository.getTaskLiveData()
     }
-//
-//    private val _rooms = MutableStateFlow<List<Room>>(emptyList())
-//    val rooms: StateFlow<List<Room>> get() = _rooms
-//
-//    private val _chats = MutableStateFlow<List<Chat>>(emptyList())
-//    val chats: StateFlow<List<Chat>> get() = _chats
-//
-//    fun profileUpdate(userId: String,userData: UserDataModel){
-//        _profileStatus.value = TaskResult.Loading()
-//        viewModelScope.launch(Dispatchers.IO) {
-//            val result = profileRepository.setupProfile(userId,userData)
-//            withContext(Dispatchers.Main){
-//                _profileStatus.value = result
-//            }
-//        }
-//    }
 
 }

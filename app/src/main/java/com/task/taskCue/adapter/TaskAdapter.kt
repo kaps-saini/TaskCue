@@ -17,13 +17,19 @@ class TaskAdapter:RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
     inner class TaskViewHolder(view:View):RecyclerView.ViewHolder(view){
         private val title:TextView = view.findViewById(R.id.tvTaskName)
-       // private val taskDescription:TextView = view.findViewById(R.id.tvTaskDescription)
+        private val taskDescription:TextView = view.findViewById(R.id.tvTaskDescription)
         private val ivOption:ImageView = view.findViewById(R.id.ivOption)
         val cardView :CardView = view.findViewById<CardView>(R.id.cvTask)
         val divider:MaterialDivider = view.findViewById(R.id.divider)
 
         fun bind(taskModel: TaskModel){
             title.text = taskModel.taskTitle
+            if (taskModel.taskDescription?.isEmpty() == true){
+                taskDescription.visibility = View.GONE
+            }else{
+                taskDescription.visibility = View.VISIBLE
+                taskDescription.text = taskModel.taskDescription
+            }
         }
     }
 

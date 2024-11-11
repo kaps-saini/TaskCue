@@ -8,4 +8,5 @@ interface AuthRepository {
     suspend fun googleSignIn(idToken:String): Flow<AuthResult>
     fun getCurrentUser(): FirebaseUser?
     suspend fun signOut()
+    fun addUserToFirebase(userId:String)
 }
